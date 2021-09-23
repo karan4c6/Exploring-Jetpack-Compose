@@ -31,13 +31,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.karansyd4.composelearn.ui.theme.ComposeLearnTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+private const val TAG = "MainActivity"
+
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -171,9 +175,11 @@ private fun ListHeaderItemContent(itemType: ItemType.Header) {
         textAlign = TextAlign.Center,
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
-        modifier = Modifier.fillMaxWidth().semantics { heading() })
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics { heading() })
     Image(
-        painter = painterResource(id = R.drawable.picto_empty_state_104),
+        painter = painterResource(id = R.drawable.ic_launcher_background),
         alignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth(), contentDescription = "Empty Box"
     )
