@@ -82,7 +82,7 @@ fun PlaygroundList(onClick: (Int) -> Unit) {
             onClick = { onClick(PlaygroundItems.HETEROGENEOUS_LIST.ordinal) },
             modifier = Modifier.padding(top = 8.dp, start = 10.dp)
         ) {
-            Text(text = "Heterogeneous List Demo")
+            Text(text = "Canvas Demo")
         }
     }
 }
@@ -92,11 +92,14 @@ fun onclick(id: Int) {
         PlaygroundItems.HETEROGENEOUS_LIST.ordinal -> {
             // navigate to Heterogeneous List Screen
         }
+        PlaygroundItems.CANVAS.ordinal -> {
+
+        }
     }
 }
 
 enum class PlaygroundItems {
-    HETEROGENEOUS_LIST,
+    HETEROGENEOUS_LIST, CANVAS
 }
 
 @Composable
