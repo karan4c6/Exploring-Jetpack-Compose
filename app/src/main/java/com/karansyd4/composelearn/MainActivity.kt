@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +38,7 @@ import com.karansyd4.composelearn.ui.theme.ComposeLearnTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.format.TextStyle
 
 private const val TAG = "MainActivity"
 
@@ -48,11 +50,53 @@ class MainActivity : ComponentActivity() {
             ComposeLearnTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    PlaygroundList(::onclick)
+//                    ComposeUIScreen(getPreviewItemState())
                 }
             }
         }
     }
+}
+
+@Composable
+fun PlaygroundList(onClick: (Int) -> Unit) {
+    Column {
+        Text(
+            text = "Playground",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp)
+        )
+
+        TextButton(
+            onClick = { onClick(PlaygroundItems.HETEROGENEOUS_LIST.ordinal) },
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(top = 16.dp, start = 10.dp),
+        ) {
+            Text(text = "Heterogeneous List Demo", textAlign = TextAlign.Start)
+        }
+
+        TextButton(
+            onClick = { onClick(PlaygroundItems.HETEROGENEOUS_LIST.ordinal) },
+            modifier = Modifier.padding(top = 8.dp, start = 10.dp)
+        ) {
+            Text(text = "Heterogeneous List Demo")
+        }
+    }
+}
+
+fun onclick(id: Int) {
+    when (id) {
+        PlaygroundItems.HETEROGENEOUS_LIST.ordinal -> {
+            // navigate to Heterogeneous List Screen
+        }
+    }
+}
+
+enum class PlaygroundItems {
+    HETEROGENEOUS_LIST,
 }
 
 @Composable
@@ -62,7 +106,7 @@ fun Greeting(name: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun GreetingPreview() {
     ComposeLearnTheme {
         Greeting("Android")
     }
@@ -193,10 +237,6 @@ sealed class ItemType {
 
 data class ItemsState(val itemsList: List<ItemType>)
 
-fun refresh() {
-    Log.d(TAG, "refresh: event Received")
-}
-
 fun onclick() {
     Log.d(TAG, "onclick: Button clicked")
 }
@@ -312,4 +352,10 @@ fun PreviewActionButton() {
     MaterialTheme {
         LowActionButton(text = "Low Emphasis Action Button") {}
     }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun PreviewPlaygroundScreen() {
+    PlaygroundList {}
 }
